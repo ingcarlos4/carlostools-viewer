@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visor 3D CarlosTools</title>
+
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 14px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 80vh;
+      background: #e8e8e8;
+    }
+
+    .info {
+      padding: 12px;
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+  <header>CarlosTools QR Viewer</header>
+
+  <model-viewer
+    id="viewer"
+    camera-controls
+    auto-rotate
+    ar
+    shadow-intensity="1"
+    alt="Modelo 3D del mueble">
+  </model-viewer>
+
+  <div class="info">
+    Escanea, rota y visualiza el módulo en 3D.
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const modelUrl = params.get("model");
+
+    if (modelUrl) {
+      document.getElementById("viewer").src = modelUrl;
+    } else {
+      document.querySelector(".info").innerHTML =
+        "No se encontró ningún modelo. Agrega ?model=URL_DEL_MODELO al enlace.";
+    }
+  </script>
+</body>
+</html>
